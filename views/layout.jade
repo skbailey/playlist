@@ -2,6 +2,9 @@ doctype 5
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css', media="all")
+    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css', media="all")
+    link(rel='stylesheet', href='/stylesheets/base.css', media="all")
   body
-    block content
+    #container
+      block content
