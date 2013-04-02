@@ -44,10 +44,12 @@ define [
     addSong: (evt) ->
       evt.preventDefault()
       
-      artist = @$("input.artist")
-      song = @$("input.song")
+      artistInput = @$("input.artist")
+      songInput = @$("input.song")
       
-      
+      @model.addSong artist: artistInput.val(), song: songInput.val()
+      artistInput.val("")
+      songInput.val("")
 
     update: (evt) ->
       unless evt.which is 13

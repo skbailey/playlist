@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(["jquery", "backbone"], function($, Backbone) {
+  define(["jquery", "backbone", "collections/songs"], function($, Backbone, SongsCollection) {
     var PlaylistModel, _ref;
 
     return PlaylistModel = (function(_super) {
@@ -16,12 +16,24 @@
 
       PlaylistModel.prototype.idAttribute = "_id";
 
-      PlaylistModel.prototype.initialize = function() {};
+      PlaylistModel.prototype.initialize = function() {
+        return this.on("sync", this.createSongsCollection, this);
+      };
 
       PlaylistModel.prototype.validate = function(attrs, options) {
         if ($.trim(attrs.title) === "") {
           return "You must enter a name for the playlist!";
         }
+      };
+
+      PlaylistModel.prototype.addSong = function(song) {
+        return this.songs.create(song);
+      };
+
+      PlaylistModel.prototype.createSongsCollection = function() {
+        return this.songs = new SongsCollection(null, {
+          playlistID: this.id
+        });
       };
 
       return PlaylistModel;

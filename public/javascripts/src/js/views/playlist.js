@@ -66,11 +66,17 @@
       };
 
       PlaylistView.prototype.addSong = function(evt) {
-        var artist, song;
+        var artistInput, songInput;
 
         evt.preventDefault();
-        artist = this.$("input.artist");
-        return song = this.$("input.song");
+        artistInput = this.$("input.artist");
+        songInput = this.$("input.song");
+        this.model.addSong({
+          artist: artistInput.val(),
+          song: songInput.val()
+        });
+        artistInput.val("");
+        return songInput.val("");
       };
 
       PlaylistView.prototype.update = function(evt) {
