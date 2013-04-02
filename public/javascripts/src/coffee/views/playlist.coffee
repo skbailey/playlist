@@ -20,17 +20,14 @@ define [
     initialize: ->
       @model.on "destroy", @removeView, @
       @model.on "add:model", @addSongView, @
-      @model.on "songs:created", @addSongToPlaylist, @
 
     render: ->
       renderedContent = playlistTemplate['playlist.hbs'](name: @model.get('name'), id: @model.id)
       @$el.html(renderedContent)
       
-      @songs ?= @$ ".songs"
       playlistSongs = @model.get("songs")
       playlistSongs.forEach (song) =>
-        songView = new SongView model: new SongModel song
-        @songs.append songView.render().el
+        @model.addSong song
       @
 
     delete: (evt) ->
@@ -56,13 +53,16 @@ define [
       artistInput = @$("input.artist")
       songInput = @$("input.song")
       
-      @model.addSong artist: artistInput.val(), song: songInput.val()
+      @model.addSongAndSave artist: artistInput.val(), song: songInput.val()
       artistInput.val("")
       songInput.val("")
       
     addSongView: ->
-      songView = new SongView model: @model.getLastSong()
-      @songs.append songView.render().el
+      @songs ?= @$ ".songs"
+      @songs.empty()
+      @model.songs.forEach (song) =>
+        songView = new SongView model: song
+        @songs.append songView.render().el
       
     addSongToPlaylist: ->
       console.log "adding songs to playlist"

@@ -11,7 +11,6 @@ define ["jquery", "backbone", "templates/song"], ($, Backbone, songTemplate) ->
       @model.on "destroy", @removeView, @
     
     render: ->
-      console.log "songmodel", @model
       renderedContent = songTemplate['song.hbs']
         artist: @model.get('artist')
         song: @model.get('song')

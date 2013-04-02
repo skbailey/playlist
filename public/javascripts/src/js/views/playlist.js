@@ -27,12 +27,11 @@
 
       PlaylistView.prototype.initialize = function() {
         this.model.on("destroy", this.removeView, this);
-        this.model.on("add:model", this.addSongView, this);
-        return this.model.on("songs:created", this.addSongToPlaylist, this);
+        return this.model.on("add:model", this.addSongView, this);
       };
 
       PlaylistView.prototype.render = function() {
-        var playlistSongs, renderedContent, _ref1,
+        var playlistSongs, renderedContent,
           _this = this;
 
         renderedContent = playlistTemplate['playlist.hbs']({
@@ -40,17 +39,9 @@
           id: this.model.id
         });
         this.$el.html(renderedContent);
-        if ((_ref1 = this.songs) == null) {
-          this.songs = this.$(".songs");
-        }
         playlistSongs = this.model.get("songs");
         playlistSongs.forEach(function(song) {
-          var songView;
-
-          songView = new SongView({
-            model: new SongModel(song)
-          });
-          return _this.songs.append(songView.render().el);
+          return _this.model.addSong(song);
         });
         return this;
       };
@@ -87,7 +78,7 @@
         evt.preventDefault();
         artistInput = this.$("input.artist");
         songInput = this.$("input.song");
-        this.model.addSong({
+        this.model.addSongAndSave({
           artist: artistInput.val(),
           song: songInput.val()
         });
@@ -96,12 +87,21 @@
       };
 
       PlaylistView.prototype.addSongView = function() {
-        var songView;
+        var _ref1,
+          _this = this;
 
-        songView = new SongView({
-          model: this.model.getLastSong()
+        if ((_ref1 = this.songs) == null) {
+          this.songs = this.$(".songs");
+        }
+        this.songs.empty();
+        return this.model.songs.forEach(function(song) {
+          var songView;
+
+          songView = new SongView({
+            model: song
+          });
+          return _this.songs.append(songView.render().el);
         });
-        return this.songs.append(songView.render().el);
       };
 
       PlaylistView.prototype.addSongToPlaylist = function() {

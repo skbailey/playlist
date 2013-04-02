@@ -14,6 +14,8 @@
         return _ref;
       }
 
+      SongModel.prototype.idAttribute = "_id";
+
       return SongModel;
 
     })(Backbone.Model);

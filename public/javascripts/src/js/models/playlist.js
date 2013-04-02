@@ -34,6 +34,10 @@
       };
 
       PlaylistModel.prototype.addSong = function(song) {
+        return this.songs.add(song);
+      };
+
+      PlaylistModel.prototype.addSongAndSave = function(song) {
         return this.songs.create(song);
       };
 

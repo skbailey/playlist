@@ -14,7 +14,8 @@ module.exports = (app) ->
 
   app.del "/playlists/:id", (req, res) ->
     Playlist.findById req.params.id, (err, playlist) ->
-      res.send(200)
+      playlist.remove (err) ->
+        res.send(200)
 
   app.put "/playlists/:id", (req, res) ->
     Playlist.update {id: req.params.id}, {title: req.body.title}, ->

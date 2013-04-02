@@ -27,7 +27,6 @@
       SongView.prototype.render = function() {
         var renderedContent;
 
-        console.log("songmodel", this.model);
         renderedContent = songTemplate['song.hbs']({
           artist: this.model.get('artist'),
           song: this.model.get('song')

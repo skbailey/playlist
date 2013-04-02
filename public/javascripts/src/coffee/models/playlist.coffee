@@ -23,6 +23,9 @@ define [
         "You must enter a name for the playlist!"
         
     addSong: (song) ->
+      @songs.add song
+      
+    addSongAndSave: (song) ->
       @songs.create song
       
     createSongsUrl: ->
