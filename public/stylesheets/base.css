@@ -25,6 +25,18 @@ i {
   padding: 0;
 }
 
-.song {
+#playlists .song-creator {
+  background-color: #ccc;
+  padding: 15px;
+}
+
+#playlists .song {
   border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+#playlists .song .icon-trash {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
