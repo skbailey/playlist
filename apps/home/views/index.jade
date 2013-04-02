@@ -7,7 +7,7 @@ block content
   #playlist-creator
     form(action="/playlists", method="post")
       input(type="text", placeholder="Name your playlist")
-      input.btn(type="submit", value="New")
+      input.btn(type="submit", value="Make New Playlist")
     button.btn Create A Playlist
 
   div
@@ -26,7 +26,7 @@ block content
               input(type="text", placeholder="Artist")
             label Song:
               input(type="text", placeholder="Song")
-            input.btn(type="submit", value="Add Song")
+            input.btn.pull-right(type="submit", value="Add Song")
 
         ul.songs
           li.song

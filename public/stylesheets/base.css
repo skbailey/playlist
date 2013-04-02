@@ -20,6 +20,10 @@ i {
   text-align: center;
 }
 
+#playlist-creator form input {
+  margin: 0 5px;
+}
+
 #playlists {
   margin: 0 10%;
   padding: 0;
@@ -28,6 +32,16 @@ i {
 #playlists .song-creator {
   background-color: #ccc;
   padding: 15px;
+}
+
+#playlists .song-creator label {
+  margin: 0 0 15px 15px;
+}
+
+#playlists .song-creator input[type="text"] {
+  width: 250px;
+  vertical-align: middle;
+  margin: 0 0 0 15px;
 }
 
 #playlists .song {
