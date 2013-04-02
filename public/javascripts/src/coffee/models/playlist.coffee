@@ -1,9 +1,9 @@
-define ["backbone"], (Backbone) ->
+define ["jquery", "backbone"], ($, Backbone) ->
   
   class PlaylistModel extends Backbone.Model
 
     idAttribute: "_id"
 
     validate: (attrs, options) ->
-      if attrs.title is ""
+      if $.trim(attrs.title) is ""
         "You must enter a name for the playlist!"

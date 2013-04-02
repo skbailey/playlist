@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(["backbone", "templates/playlist"], function(Backbone, playlistTemplate) {
+  define(["jquery", "backbone", "templates/playlist"], function($, Backbone, playlistTemplate) {
     var PlaylistView;
     return PlaylistView = (function(_super) {
 
@@ -16,7 +16,9 @@
       PlaylistView.prototype.tagName = "li";
 
       PlaylistView.prototype.events = {
-        "click .icon-trash": "delete"
+        "click .icon-trash": "delete",
+        "click .icon-edit": "edit",
+        "keypress input.title": "update"
       };
 
       PlaylistView.prototype.initialize = function() {
@@ -38,6 +40,26 @@
 
       PlaylistView.prototype.removeView = function() {
         return this.remove();
+      };
+
+      PlaylistView.prototype.edit = function() {
+        this.inputEdit = this.$('input.title').show();
+        return this.spanEdit = this.$('span.title').hide();
+      };
+
+      PlaylistView.prototype.update = function(evt) {
+        var newTitle;
+        if (evt.which !== 13) {
+          return;
+        }
+        newTitle = this.inputEdit.val();
+        if ($.trim(newTitle) !== "") {
+          this.spanEdit.text(newTitle);
+          this.model.set('title', newTitle);
+          this.model.save();
+        }
+        this.inputEdit.hide();
+        return this.spanEdit.show();
       };
 
       return PlaylistView;

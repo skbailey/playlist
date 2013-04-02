@@ -13,3 +13,6 @@ module.exports = (app) ->
     Playlist.findById req.params.id, (err, playlist) ->
       res.send(200)
 
+  app.put "/playlists/:id", (req, res) ->
+    console.log "Update playlist", req.params.id
+    Playlist.update {id: req.params.id}, {title: req.body.title}

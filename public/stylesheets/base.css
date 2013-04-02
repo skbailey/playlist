@@ -29,6 +29,10 @@ i {
   padding: 0;
 }
 
+#playlists input.title {
+  display: none;
+}
+
 #playlists .song-creator {
   display: none;
   background-color: #ccc;
