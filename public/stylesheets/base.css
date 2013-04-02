@@ -20,14 +20,6 @@ i {
   text-align: center;
 }
 
-#playlist-creator form {
-  display: none;
-}
-
-#playlist-creator form.show {
-  display: block;
-}
-
 #playlist-creator form input {
   margin: 0 5px;
 }

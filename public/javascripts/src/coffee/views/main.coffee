@@ -11,17 +11,12 @@ define [
     el: "#container"
 
     events:
-      "click .create-playlist" : "showCreatePlaylistForm"
       "submit #playlist-creator form" : "createPlaylist"
 
     initialize: ->
       @collection = new PlaylistCollection
       @collection.on "invalid", @showPlaylistSaveError, @
       @collection.on "sync", @appendPlaylist, @
-
-    showCreatePlaylistForm: (evt) ->
-      @createPlaylistForm ?= @$("#playlist-creator form")
-      @createPlaylistForm.addClass("show")
 
     createPlaylist: (evt) ->
       evt.preventDefault();

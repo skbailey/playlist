@@ -16,7 +16,6 @@
       MainView.prototype.el = "#container";
 
       MainView.prototype.events = {
-        "click .create-playlist": "showCreatePlaylistForm",
         "submit #playlist-creator form": "createPlaylist"
       };
 
@@ -24,14 +23,6 @@
         this.collection = new PlaylistCollection;
         this.collection.on("invalid", this.showPlaylistSaveError, this);
         return this.collection.on("sync", this.appendPlaylist, this);
-      };
-
-      MainView.prototype.showCreatePlaylistForm = function(evt) {
-        var _ref;
-        if ((_ref = this.createPlaylistForm) == null) {
-          this.createPlaylistForm = this.$("#playlist-creator form");
-        }
-        return this.createPlaylistForm.addClass("show");
       };
 
       MainView.prototype.createPlaylist = function(evt) {
