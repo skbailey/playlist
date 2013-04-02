@@ -5,11 +5,15 @@
     paths: {
       jquery: "../../lib/jquery",
       underscore: "../../lib/underscore",
-      backbone: "../../lib/backbone"
+      backbone: "../../lib/backbone",
+      handlebars: "../../lib/handlebars.runtime"
     },
     shim: {
       jquery: {
         exports: "$"
+      },
+      handlebars: {
+        exports: "Handlebars"
       },
       underscore: {
         exports: "_"

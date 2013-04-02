@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(["jquery", "underscore", "backbone", "collections/playlists"], function($, _, Backbone, PlaylistCollection) {
+  define(["jquery", "underscore", "backbone", "collections/playlists", "views/playlist"], function($, _, Backbone, PlaylistCollection, PlaylistView) {
     var MainView;
     return MainView = (function(_super) {
 
@@ -22,7 +22,8 @@
 
       MainView.prototype.initialize = function() {
         this.collection = new PlaylistCollection;
-        return this.collection.on("invalid", this.showPlaylistSaveError, this);
+        this.collection.on("invalid", this.showPlaylistSaveError, this);
+        return this.collection.on("sync", this.appendPlaylist, this);
       };
 
       MainView.prototype.showCreatePlaylistForm = function(evt) {
@@ -34,13 +35,24 @@
       };
 
       MainView.prototype.createPlaylist = function(evt) {
-        var input;
+        var nameInput;
         evt.preventDefault();
-        input = $(evt.target).find('input');
+        nameInput = $(evt.target).find('.name');
         this.collection.create({
-          title: input.val()
+          title: nameInput.val()
         });
-        return input.val("");
+        return nameInput.val("");
+      };
+
+      MainView.prototype.appendPlaylist = function() {
+        var _ref;
+        if ((_ref = this.playlists) == null) {
+          this.playlists = this.$("#playlists");
+        }
+        this.playlistView = new PlaylistView({
+          model: this.collection.last()
+        });
+        return this.playlists.append(this.playlistView.render().el);
       };
 
       MainView.prototype.showPlaylistSaveError = function(model, error) {

@@ -2,8 +2,9 @@ define [
   "jquery", 
   "underscore", 
   "backbone",
-  "collections/playlists"
-  ], ($, _, Backbone, PlaylistCollection) ->
+  "collections/playlists",
+  "views/playlist"
+  ], ($, _, Backbone, PlaylistCollection, PlaylistView) ->
 
   class MainView extends Backbone.View
 
@@ -16,6 +17,7 @@ define [
     initialize: ->
       @collection = new PlaylistCollection
       @collection.on "invalid", @showPlaylistSaveError, @
+      @collection.on "sync", @appendPlaylist, @
 
     showCreatePlaylistForm: (evt) ->
       @createPlaylistForm ?= @$("#playlist-creator form")
@@ -24,9 +26,14 @@ define [
     createPlaylist: (evt) ->
       evt.preventDefault();
 
-      input = $(evt.target).find('input')
-      @collection.create title: input.val()
-      input.val("")
+      nameInput = $(evt.target).find('.name')
+      @collection.create title: nameInput.val()
+      nameInput.val("")
+
+    appendPlaylist: ->
+      @playlists ?= @$ "#playlists"
+      @playlistView = new PlaylistView model: @collection.last()
+      @playlists.append @playlistView.render().el
 
     showPlaylistSaveError: (model, error) ->
       alert error

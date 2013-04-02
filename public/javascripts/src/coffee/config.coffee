@@ -3,10 +3,13 @@ require.config
     jquery: "../../lib/jquery"
     underscore: "../../lib/underscore"
     backbone: "../../lib/backbone"
+    handlebars: "../../lib/handlebars.runtime"
 
   shim:
     jquery:
       exports: "$"
+    handlebars:
+      exports: "Handlebars"
     underscore:
       exports: "_"
     backbone:

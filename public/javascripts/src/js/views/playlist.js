@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(["backbone"], function(Backbone) {
+  define(["backbone", "templates/playlist"], function(Backbone, playlistTemplate) {
     var PlaylistView;
     return PlaylistView = (function(_super) {
 
@@ -13,7 +13,13 @@
         return PlaylistView.__super__.constructor.apply(this, arguments);
       }
 
-      PlaylistView.prototype.render = function() {};
+      PlaylistView.prototype.render = function() {
+        var renderedContent;
+        renderedContent = window.JST['playlist.hbs']({
+          title: this.model.get('title')
+        });
+        return this.$el.html(renderedContent);
+      };
 
       return PlaylistView;
 
