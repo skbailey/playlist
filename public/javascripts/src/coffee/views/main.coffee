@@ -17,6 +17,8 @@ define [
       @collection = new PlaylistCollection
       @collection.on "invalid", @showPlaylistSaveError, @
       @collection.on "sync", @appendPlaylist, @
+      @collection.on "reset", @loadPlaylists, @
+      @collection.fetch()
 
     createPlaylist: (evt) ->
       evt.preventDefault();
@@ -32,3 +34,6 @@ define [
 
     showPlaylistSaveError: (model, error) ->
       alert error
+      
+    loadPlaylists: ->
+      console.log "loading playlists", 

@@ -10,6 +10,7 @@ define [
     
     initialize: ->
       @on "sync", @createSongsCollection, @
+      @on "destroy:model", @removeSong, @
 
     validate: (attrs, options) ->
       if $.trim(attrs.title) is ""

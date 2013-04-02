@@ -8,7 +8,7 @@ var express = require('express'),
     path = require('path'),
     mongoose = require('mongoose');
 
-mongoose.connect('localhost', 'test');
+mongoose.connect('localhost', 'playlists');
 var app = express();
 
 app.configure(function(){

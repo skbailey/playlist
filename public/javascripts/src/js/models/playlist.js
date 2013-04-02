@@ -17,7 +17,8 @@
       PlaylistModel.prototype.idAttribute = "_id";
 
       PlaylistModel.prototype.initialize = function() {
-        return this.on("sync", this.createSongsCollection, this);
+        this.on("sync", this.createSongsCollection, this);
+        return this.on("destroy:model", this.removeSong, this);
       };
 
       PlaylistModel.prototype.validate = function(attrs, options) {

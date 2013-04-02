@@ -23,7 +23,9 @@
       MainView.prototype.initialize = function() {
         this.collection = new PlaylistCollection;
         this.collection.on("invalid", this.showPlaylistSaveError, this);
-        return this.collection.on("sync", this.appendPlaylist, this);
+        this.collection.on("sync", this.appendPlaylist, this);
+        this.collection.on("reset", this.loadPlaylists, this);
+        return this.collection.fetch();
       };
 
       MainView.prototype.createPlaylist = function(evt) {
@@ -51,6 +53,10 @@
 
       MainView.prototype.showPlaylistSaveError = function(model, error) {
         return alert(error);
+      };
+
+      MainView.prototype.loadPlaylists = function() {
+        return console.log("loading playlists");
       };
 
       return MainView;
