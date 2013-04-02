@@ -18,9 +18,7 @@ module.exports = (app) ->
         res.send(200)
 
   app.put "/playlists/:id", (req, res) ->
-    console.log "name", req.body.title
     Playlist.update {name: req.body.name}, {name: req.body.title}, (err, numberAffected) ->
-      console.log "#{numberAffected} lines updated"
       res.send(200)
 
   app.post "/playlists/:id/songs", (req, res) ->
@@ -28,3 +26,9 @@ module.exports = (app) ->
       playlist.songs.push artist: req.body.artist, song: req.body.song
       playlist.save (err) ->
         res.json playlist.songs
+        
+  app.del "/playlists/:plid/songs/:songid", (req, res) ->
+    Playlist.findById req.params.plid, (err, playlist) ->
+      playlist.songs.id(req.params.songid).remove()
+      playlist.save (err) ->
+        res.send(200)
