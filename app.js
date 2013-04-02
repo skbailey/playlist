@@ -5,8 +5,10 @@ require('coffee-script');
 
 var express = require('express'),
     http = require('http'),
-    path = require('path');
+    path = require('path'),
+    mongoose = require('mongoose');
 
+mongoose.connect('localhost', 'test');
 var app = express();
 
 app.configure(function(){

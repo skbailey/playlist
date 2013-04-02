@@ -13,6 +13,8 @@
         return PlaylistModel.__super__.constructor.apply(this, arguments);
       }
 
+      PlaylistModel.prototype.idAttribute = "_id";
+
       PlaylistModel.prototype.validate = function(attrs, options) {
         if (attrs.title === "") {
           return "You must enter a name for the playlist!";

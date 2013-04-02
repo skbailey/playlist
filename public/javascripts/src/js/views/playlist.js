@@ -15,6 +15,14 @@
 
       PlaylistView.prototype.tagName = "li";
 
+      PlaylistView.prototype.events = {
+        "click .icon-trash": "delete"
+      };
+
+      PlaylistView.prototype.initialize = function() {
+        return this.model.on("destroy", this.removeView, this);
+      };
+
       PlaylistView.prototype.render = function() {
         var renderedContent;
         renderedContent = playlistTemplate['playlist.hbs']({
@@ -22,6 +30,14 @@
         });
         this.$el.html(renderedContent);
         return this;
+      };
+
+      PlaylistView.prototype["delete"] = function(evt) {
+        return this.model.destroy();
+      };
+
+      PlaylistView.prototype.removeView = function() {
+        return this.remove();
       };
 
       return PlaylistView;
