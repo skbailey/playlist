@@ -18,7 +18,9 @@ module.exports = (app) ->
         res.send(200)
 
   app.put "/playlists/:id", (req, res) ->
-    Playlist.update {id: req.params.id}, {title: req.body.title}, ->
+    console.log "name", req.body.title
+    Playlist.update {name: req.body.name}, {name: req.body.title}, (err, numberAffected) ->
+      console.log "#{numberAffected} lines updated"
       res.send(200)
 
   app.post "/playlists/:id/songs", (req, res) ->
