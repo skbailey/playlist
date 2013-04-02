@@ -1,3 +1,30 @@
 h1 {
 	text-align: center;
 }
+
+ul {
+  list-style-type: none;
+}
+
+i {
+  cursor: pointer;
+  border: 5px solid transparent;
+  margin-right: 5px;
+}
+
+.controls {
+  padding-left: 10px
+}
+
+#playlist-creator {
+  text-align: center;
+}
+
+#playlists {
+  margin: 0 10%;
+  padding: 0;
+}
+
+.song {
+  border-bottom: 1px solid #eee;
+}

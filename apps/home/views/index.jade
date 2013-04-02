@@ -2,3 +2,32 @@ extends ../../../views/layout
 
 block content
   h1 Playlists in the Cloud
+  hr
+
+  #playlist-creator
+    form(action="/playlist", method="post")
+      input(type="text", placeholder="Name your playlist")
+      input.btn(type="submit", value="New")
+    button.btn Create A Playlist
+
+  div
+    ul#playlists
+      li.playlist
+        h3 
+          | Mixte Hits
+          span.controls
+            i.icon-plus
+            i.icon-edit
+        ul.songs
+          li.song
+            dl
+              dt Artist: 
+              dd Lana Del Rey
+              dt Song: 
+              dd Blue Jeans
+          li.song
+            dl
+              dt Artist: 
+              dd 2 Chainz
+              dt Song: 
+              dd I'm Different
