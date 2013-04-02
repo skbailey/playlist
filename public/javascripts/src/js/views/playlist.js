@@ -13,12 +13,15 @@
         return PlaylistView.__super__.constructor.apply(this, arguments);
       }
 
+      PlaylistView.prototype.tagName = "li";
+
       PlaylistView.prototype.render = function() {
         var renderedContent;
-        renderedContent = window.JST['playlist.hbs']({
+        renderedContent = playlistTemplate['playlist.hbs']({
           title: this.model.get('title')
         });
-        return this.$el.html(renderedContent);
+        this.$el.html(renderedContent);
+        return this;
       };
 
       return PlaylistView;

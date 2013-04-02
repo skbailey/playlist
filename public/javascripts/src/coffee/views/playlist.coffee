@@ -2,6 +2,9 @@ define ["backbone", "templates/playlist"], (Backbone, playlistTemplate) ->
 
   class PlaylistView extends Backbone.View
 
+    tagName: "li"
+
     render: ->
-      renderedContent = window.JST['playlist.hbs'](title: @model.get('title'))
+      renderedContent = playlistTemplate['playlist.hbs'](title: @model.get('title'))
       @$el.html(renderedContent)
+      @
