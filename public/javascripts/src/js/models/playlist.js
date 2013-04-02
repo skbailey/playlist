@@ -31,9 +31,18 @@
       };
 
       PlaylistModel.prototype.createSongsCollection = function() {
-        return this.songs = new SongsCollection(null, {
+        this.songs = new SongsCollection(null, {
           playlistID: this.id
         });
+        return this.songs.on("all", this.bubbleEvents, this);
+      };
+
+      PlaylistModel.prototype.bubbleEvents = function(eventName) {
+        return this.trigger("" + eventName + ":model");
+      };
+
+      PlaylistModel.prototype.getLastSong = function() {
+        return this.songs.last();
       };
 
       return PlaylistModel;

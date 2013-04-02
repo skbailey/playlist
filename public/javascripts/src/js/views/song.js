@@ -16,6 +16,14 @@
 
       SongView.prototype.tagName = "li";
 
+      SongView.prototype.events = {
+        "click .remove-song": "delete"
+      };
+
+      SongView.prototype.initialize = function() {
+        return this.model.on("destroy", this.removeView, this);
+      };
+
       SongView.prototype.render = function() {
         var renderedContent;
 
@@ -25,6 +33,15 @@
         });
         this.$el.html(renderedContent);
         return this;
+      };
+
+      SongView.prototype["delete"] = function(evt) {
+        this.model.destroy();
+        return false;
+      };
+
+      SongView.prototype.removeView = function() {
+        return this.remove();
       };
 
       return SongView;

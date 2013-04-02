@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(["jquery", "backbone", "templates/playlist", "models/song"], function($, Backbone, playlistTemplate, SongModel) {
+  define(["jquery", "backbone", "templates/playlist", "models/song", "views/song"], function($, Backbone, playlistTemplate, SongModel, SongView) {
     var PlaylistView, _ref;
 
     return PlaylistView = (function(_super) {
@@ -17,7 +17,7 @@
       PlaylistView.prototype.tagName = "li";
 
       PlaylistView.prototype.events = {
-        "click .icon-trash": "delete",
+        "click .remove-playlist": "delete",
         "click .icon-edit": "edit",
         "click .icon-plus": "showAddSongsForm",
         "click .song-creator .icon-remove": "hideAddSongsForm",
@@ -26,7 +26,8 @@
       };
 
       PlaylistView.prototype.initialize = function() {
-        return this.model.on("destroy", this.removeView, this);
+        this.model.on("destroy", this.removeView, this);
+        return this.model.on("add:model", this.addSongView, this);
       };
 
       PlaylistView.prototype.render = function() {
@@ -77,6 +78,18 @@
         });
         artistInput.val("");
         return songInput.val("");
+      };
+
+      PlaylistView.prototype.addSongView = function() {
+        var songView, _ref1;
+
+        if ((_ref1 = this.songs) == null) {
+          this.songs = this.$(".songs");
+        }
+        songView = new SongView({
+          model: this.model.getLastSong()
+        });
+        return this.songs.append(songView.render().el);
       };
 
       PlaylistView.prototype.update = function(evt) {

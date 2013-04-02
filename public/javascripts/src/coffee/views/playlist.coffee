@@ -3,13 +3,14 @@ define [
   "backbone", 
   "templates/playlist",
   "models/song",
-  ], ($, Backbone, playlistTemplate, SongModel) ->
+  "views/song"
+  ], ($, Backbone, playlistTemplate, SongModel, SongView) ->
 
   class PlaylistView extends Backbone.View
 
     tagName: "li"
     events:
-      "click .icon-trash" : "delete"
+      "click .remove-playlist" : "delete"
       "click .icon-edit" : "edit"
       "click .icon-plus" : "showAddSongsForm"
       "click .song-creator .icon-remove" : "hideAddSongsForm"
@@ -18,6 +19,7 @@ define [
 
     initialize: ->
       @model.on "destroy", @removeView, @
+      @model.on "add:model", @addSongView, @
 
     render: ->
       renderedContent = playlistTemplate['playlist.hbs'](title: @model.get('title'))
@@ -50,6 +52,11 @@ define [
       @model.addSong artist: artistInput.val(), song: songInput.val()
       artistInput.val("")
       songInput.val("")
+      
+    addSongView: ->
+      @songs ?= @$ ".songs"
+      songView = new SongView model: @model.getLastSong()
+      @songs.append songView.render().el
 
     update: (evt) ->
       unless evt.which is 13

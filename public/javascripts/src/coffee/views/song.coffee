@@ -4,6 +4,12 @@ define ["jquery", "backbone", "templates/song"], ($, Backbone, songTemplate) ->
     
     tagName: "li"
     
+    events:
+      "click .remove-song" : "delete"
+      
+    initialize: ->
+      @model.on "destroy", @removeView, @
+    
     render: ->
       renderedContent = songTemplate['song.hbs']
         artist: @model.get('artist')
@@ -11,3 +17,10 @@ define ["jquery", "backbone", "templates/song"], ($, Backbone, songTemplate) ->
         
       @$el.html(renderedContent)
       @
+      
+    delete: (evt) ->
+      @model.destroy()
+      false
+      
+    removeView: ->
+      @remove()

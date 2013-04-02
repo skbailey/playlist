@@ -20,3 +20,10 @@ define [
       
     createSongsCollection: ->
       @songs = new SongsCollection null, playlistID: @id
+      @songs.on "all", @bubbleEvents, @
+      
+    bubbleEvents: (eventName) ->
+      @trigger "#{eventName}:model"
+      
+    getLastSong: ->
+      @songs.last()
