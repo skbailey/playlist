@@ -1,7 +1,10 @@
-Playlist Project (Built in 21 non-consecutive hours... I do have to work at some point lol)
+Playlist Project 
 ========
 
 A project that demonstrates my favorite tools on the front-end and backend
+--------
+
+(Built in 21 non-consecutive hours... I do have to work at some point lol)
 --------
 
 It's a playlist app.  Create playlists of songs you like.  CRUD functionality allows you to create
@@ -37,4 +40,4 @@ Back end stack
  
 ### What's missing?
 
-  * Tests (Jasmine for front end. Cucumber.js for integration)
+  * Tests (Jasmine for front end, Cucumber.js for integration)
