@@ -4,12 +4,12 @@ Playlist Project
 A project that demonstrates my favorite tools on the front-end and backend
 --------
 
-(Built in 21 non-consecutive hours... I do have to work at some point lol)
---------
 
 It's a playlist app.  Create playlists of songs you like.  CRUD functionality allows you to create
 a playlist, edit its title, delete the playlist and see all playlists.  You can add and remove songs from
 a playlist.  
+
+I build it in about 21 non-consecutive hours. Check out the git log when you clone the project.
 
 
 
