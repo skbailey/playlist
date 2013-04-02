@@ -4,7 +4,6 @@ module.exports = (app) ->
   
   app.get "/playlists", (req, res) ->
     Playlist.find {}, (err, users) ->
-      console.log "all users"
       res.json users
 
   app.post "/playlists", (req, res) ->

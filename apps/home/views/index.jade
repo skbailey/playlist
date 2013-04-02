@@ -11,34 +11,3 @@ block content
 
   div
     ul#playlists
-      li.playlist
-        h3 
-          | Mixte Hits
-          span.controls
-            i.icon-plus
-            i.icon-edit
-            i.icon-trash
-        form.song-creator(action="playlists/name/songs", method="post")
-          fieldset
-            legend Add Song
-            label Artist:
-              input(type="text", placeholder="Artist")
-            label Song:
-              input(type="text", placeholder="Song")
-            input.btn.pull-right(type="submit", value="Add Song")
-
-        ul.songs
-          li.song
-            i.icon-trash
-            dl
-              dt Artist: 
-              dd Lana Del Rey
-              dt Song: 
-              dd Blue Jeans
-          li.song
-            i.icon-trash
-            dl
-              dt Artist: 
-              dd 2 Chainz
-              dt Song: 
-              dd I'm Different
