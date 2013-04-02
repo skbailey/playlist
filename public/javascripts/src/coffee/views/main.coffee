@@ -26,6 +26,7 @@ define [
 
       input = $(evt.target).find('input')
       @collection.create title: input.val()
+      input.val("")
 
     showPlaylistSaveError: (model, error) ->
       alert error

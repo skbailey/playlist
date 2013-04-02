@@ -37,9 +37,10 @@
         var input;
         evt.preventDefault();
         input = $(evt.target).find('input');
-        return this.collection.create({
+        this.collection.create({
           title: input.val()
         });
+        return input.val("");
       };
 
       MainView.prototype.showPlaylistSaveError = function(model, error) {

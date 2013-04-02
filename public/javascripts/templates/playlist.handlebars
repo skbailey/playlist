@@ -1,0 +1,18 @@
+<li class="playlist">
+  <h3> {{title}} 
+    <span class="controls">
+      <i class="icon-plus"></i>
+      <i class="icon-edit"></i>
+      <i class="icon-trash"></i>
+    </span>
+  </h3>
+  <form action="playlists/name/songs" method="post" class="song-creator">
+    <fieldset>
+      <legend>Add Song</legend>
+      <label>Artist:<input type="text" placeholder="Artist"></label>
+      <label>Song:<input type="text" placeholder="Song"></label>
+      <input type="submit" value="Add Song" class="btn pull-right">
+    </fieldset>
+  </form>
+  <ul class="songs"></ul>
+</li>
