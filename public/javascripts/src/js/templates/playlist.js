@@ -8,9 +8,13 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<li class=\"playlist\">\n  <h3>\n    <span class=\"title\">";
-  if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "<li class=\"playlist\" data-id=\"";
+  if (stack1 = helpers.id) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.id; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n  <h3>\n    <span class=\"title\">";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "</span> \n    <input class=\"title\" type=\"text\" placeholder=\"";
   if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }

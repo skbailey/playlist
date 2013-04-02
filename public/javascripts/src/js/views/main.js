@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define(["jquery", "underscore", "backbone", "collections/playlists", "views/playlist"], function($, _, Backbone, PlaylistCollection, PlaylistView) {
+  define(["jquery", "underscore", "backbone", "collections/playlists", "views/playlist", "views/song"], function($, _, Backbone, PlaylistCollection, PlaylistView, SongView) {
     var MainView, _ref;
 
     return MainView = (function(_super) {
@@ -23,8 +23,7 @@
       MainView.prototype.initialize = function() {
         this.collection = new PlaylistCollection;
         this.collection.on("invalid", this.showPlaylistSaveError, this);
-        this.collection.on("sync", this.appendPlaylist, this);
-        this.collection.on("reset", this.loadPlaylists, this);
+        this.collection.on("sync", this.loadPlaylists, this);
         return this.collection.fetch();
       };
 
@@ -39,24 +38,23 @@
         return nameInput.val("");
       };
 
-      MainView.prototype.appendPlaylist = function() {
-        var _ref1;
+      MainView.prototype.loadPlaylists = function() {
+        var _ref1,
+          _this = this;
 
         if ((_ref1 = this.playlists) == null) {
           this.playlists = this.$("#playlists");
         }
-        this.playlistView = new PlaylistView({
-          model: this.collection.last()
+        return this.collection.forEach(function(model) {
+          _this.playlistView = new PlaylistView({
+            model: model
+          });
+          return _this.playlists.append(_this.playlistView.render().el);
         });
-        return this.playlists.append(this.playlistView.render().el);
       };
 
       MainView.prototype.showPlaylistSaveError = function(model, error) {
         return alert(error);
-      };
-
-      MainView.prototype.loadPlaylists = function() {
-        return console.log("loading playlists");
       };
 
       return MainView;

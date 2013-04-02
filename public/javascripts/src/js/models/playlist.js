@@ -17,7 +17,13 @@
       PlaylistModel.prototype.idAttribute = "_id";
 
       PlaylistModel.prototype.initialize = function() {
-        this.on("sync", this.createSongsCollection, this);
+        this.songs = new SongsCollection(null, {
+          playlistID: this.id
+        });
+        this.songs.on("all", this.bubbleEvents, this);
+        if (!this.id) {
+          this.on("sync", this.createSongsUrl, this);
+        }
         return this.on("destroy:model", this.removeSong, this);
       };
 
@@ -31,11 +37,8 @@
         return this.songs.create(song);
       };
 
-      PlaylistModel.prototype.createSongsCollection = function() {
-        this.songs = new SongsCollection(null, {
-          playlistID: this.id
-        });
-        return this.songs.on("all", this.bubbleEvents, this);
+      PlaylistModel.prototype.createSongsUrl = function() {
+        return this.songs.url = "/playlists/" + this.id + "/songs";
       };
 
       PlaylistModel.prototype.bubbleEvents = function(eventName) {

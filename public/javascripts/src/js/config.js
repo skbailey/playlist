@@ -28,7 +28,6 @@
     return $(function() {
       var mainview;
 
-      console.log("Page loaded");
       return mainview = new MainView;
     });
   });

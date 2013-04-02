@@ -3,8 +3,9 @@ define [
   "underscore", 
   "backbone",
   "collections/playlists",
-  "views/playlist"
-  ], ($, _, Backbone, PlaylistCollection, PlaylistView) ->
+  "views/playlist",
+  "views/song"
+  ], ($, _, Backbone, PlaylistCollection, PlaylistView, SongView) ->
 
   class MainView extends Backbone.View
 
@@ -16,8 +17,7 @@ define [
     initialize: ->
       @collection = new PlaylistCollection
       @collection.on "invalid", @showPlaylistSaveError, @
-      @collection.on "sync", @appendPlaylist, @
-      @collection.on "reset", @loadPlaylists, @
+      @collection.on "sync", @loadPlaylists, @
       @collection.fetch()
 
     createPlaylist: (evt) ->
@@ -27,13 +27,11 @@ define [
       @collection.create title: nameInput.val()
       nameInput.val("")
 
-    appendPlaylist: ->
+    loadPlaylists: ->
       @playlists ?= @$ "#playlists"
-      @playlistView = new PlaylistView model: @collection.last()
-      @playlists.append @playlistView.render().el
+      @collection.forEach (model) =>
+        @playlistView = new PlaylistView model: model
+        @playlists.append @playlistView.render().el
 
     showPlaylistSaveError: (model, error) ->
       alert error
-      
-    loadPlaylists: ->
-      console.log "loading playlists", 

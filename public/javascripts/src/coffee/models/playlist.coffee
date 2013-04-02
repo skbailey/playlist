@@ -9,7 +9,13 @@ define [
     idAttribute: "_id"
     
     initialize: ->
-      @on "sync", @createSongsCollection, @
+      @songs = new SongsCollection null, playlistID: @id
+      @songs.on "all", @bubbleEvents, @
+      
+      # Build the songs url immediately if the ID is available otherwise wait until the
+      # play list has been created on the server and an _id has been created in MongoDB
+      unless @id
+        @on "sync", @createSongsUrl, @
       @on "destroy:model", @removeSong, @
 
     validate: (attrs, options) ->
@@ -19,9 +25,8 @@ define [
     addSong: (song) ->
       @songs.create song
       
-    createSongsCollection: ->
-      @songs = new SongsCollection null, playlistID: @id
-      @songs.on "all", @bubbleEvents, @
+    createSongsUrl: ->
+      @songs.url = "/playlists/#{@id}/songs"
       
     bubbleEvents: (eventName) ->
       @trigger "#{eventName}:model"

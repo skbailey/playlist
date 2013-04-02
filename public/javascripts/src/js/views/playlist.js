@@ -27,16 +27,31 @@
 
       PlaylistView.prototype.initialize = function() {
         this.model.on("destroy", this.removeView, this);
-        return this.model.on("add:model", this.addSongView, this);
+        this.model.on("add:model", this.addSongView, this);
+        return this.model.on("songs:created", this.addSongToPlaylist, this);
       };
 
       PlaylistView.prototype.render = function() {
-        var renderedContent;
+        var playlistSongs, renderedContent, _ref1,
+          _this = this;
 
         renderedContent = playlistTemplate['playlist.hbs']({
-          title: this.model.get('title')
+          name: this.model.get('name'),
+          id: this.model.id
         });
         this.$el.html(renderedContent);
+        if ((_ref1 = this.songs) == null) {
+          this.songs = this.$(".songs");
+        }
+        playlistSongs = this.model.get("songs");
+        playlistSongs.forEach(function(song) {
+          var songView;
+
+          songView = new SongView({
+            model: new SongModel(song)
+          });
+          return _this.songs.append(songView.render().el);
+        });
         return this;
       };
 
@@ -81,15 +96,16 @@
       };
 
       PlaylistView.prototype.addSongView = function() {
-        var songView, _ref1;
+        var songView;
 
-        if ((_ref1 = this.songs) == null) {
-          this.songs = this.$(".songs");
-        }
         songView = new SongView({
           model: this.model.getLastSong()
         });
         return this.songs.append(songView.render().el);
+      };
+
+      PlaylistView.prototype.addSongToPlaylist = function() {
+        return console.log("adding songs to playlist");
       };
 
       PlaylistView.prototype.update = function(evt) {

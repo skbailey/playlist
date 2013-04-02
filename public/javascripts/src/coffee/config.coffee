@@ -18,6 +18,5 @@ require.config
 
 require ["jquery", "views/main"], ($, MainView) ->
   $ ->
-    console.log "Page loaded"
     mainview = new MainView
 
