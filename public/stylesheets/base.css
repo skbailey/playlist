@@ -37,6 +37,13 @@ i {
   display: none;
   background-color: #ccc;
   padding: 15px;
+  position: relative;
+}
+
+#playlists .song-creator .icon-remove {
+  position: absolute;
+  top: 5px;
+  right: 0;
 }
 
 #playlists .song-creator label {
