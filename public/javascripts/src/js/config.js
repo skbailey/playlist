@@ -21,9 +21,11 @@
     }
   });
 
-  require(["jquery"], function($) {
+  require(["jquery", "views/main"], function($, MainView) {
     return $(function() {
-      return console.log("Page loaded");
+      var mainview;
+      console.log("Page loaded");
+      return mainview = new MainView;
     });
   });
 

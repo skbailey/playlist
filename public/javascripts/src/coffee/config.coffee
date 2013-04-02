@@ -13,7 +13,8 @@ require.config
       deps: ["underscore"]
       exports: "Backbone"
 
-require ["jquery"], ($) ->
+require ["jquery", "views/main"], ($, MainView) ->
   $ ->
     console.log "Page loaded"
+    mainview = new MainView
 
