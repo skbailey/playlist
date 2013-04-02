@@ -20,7 +20,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">\n    <span class=\"controls\">\n      <i class=\"icon-plus\"></i>\n      <i class=\"icon-edit\"></i>\n      <i class=\"icon-trash remove-playlist\"></i>\n    </span>\n  </h3>\n  <form action=\"playlists/name/songs\" method=\"post\" class=\"song-creator\">\n    <i class=\"icon-remove\"></i>\n    <fieldset>\n      <legend>Add Song</legend>\n      <label>Artist:<input class=\"artist\" type=\"text\" placeholder=\"Artist\"></label>\n      <label>Song:<input class=\"song\" type=\"text\" placeholder=\"Song\"></label>\n      <input type=\"submit\" value=\"Add Song\" class=\"btn pull-right\">\n    </fieldset>\n  </form>\n  <ul class=\"songs\"></ul>\n</li>";
+    + "\">\n    <span class=\"controls\">\n      <i class=\"icon-plus\"></i>\n      <i class=\"icon-edit\"></i>\n      <i class=\"icon-trash remove-playlist\"></i>\n    </span>\n  </h3>\n  <form action=\"playlists/name/songs\" method=\"post\" class=\"song-creator\">\n    <i class=\"icon-remove\"></i>\n    <fieldset>\n      <legend>Add Song</legend>\n      <label>Artist:<input class=\"artist\" type=\"text\" placeholder=\"Artist\"></label>\n      <label>Song:<input class=\"song\" type=\"text\" placeholder=\"Song\"></label>\n      <input type=\"submit\" value=\"Add Song\" class=\"btn pull-right\">\n    </fieldset>\n  </form>\n  <ol class=\"songs\"></ol>\n</li>";
   return buffer;
   });
 

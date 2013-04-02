@@ -9,7 +9,7 @@ It's a playlist app.  Create playlists of songs you like.  CRUD functionality al
 a playlist, edit its title, delete the playlist and see all playlists.  You can add and remove songs from
 a playlist.  
 
-I build it in about 21 non-consecutive hours. Check out the git log when you clone the project.
+I built it in about 21 non-consecutive hours. Check out the git log when you clone the project.
 
 
 

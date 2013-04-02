@@ -16,6 +16,8 @@
 
       SongView.prototype.tagName = "li";
 
+      SongView.prototype.className = "song";
+
       SongView.prototype.events = {
         "click .remove-song": "delete"
       };

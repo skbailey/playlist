@@ -3,6 +3,7 @@ define ["jquery", "backbone", "templates/song"], ($, Backbone, songTemplate) ->
   class SongView extends Backbone.View
     
     tagName: "li"
+    className: "song"
     
     events:
       "click .remove-song" : "delete"

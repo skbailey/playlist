@@ -8,15 +8,15 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "\n  <li class=\"song\">\n  	<i class=\"icon-trash remove-song\"></i>\n  	<dl>\n  		<dt>Artist: </dt>\n  		<dd>";
+  buffer += "<i class=\"icon-trash remove-song\"></i>\n<dl>\n  <dt>Artist: </dt>\n  <dd>";
   if (stack1 = helpers.artist) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.artist; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</dd>\n  		<dt>Song: </dt>\n  		<dd>";
+    + "</dd>\n  <dt>Song: </dt>\n  <dd>";
   if (stack1 = helpers.song) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.song; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</dd>\n  	</dl>\n  </li>";
+    + "</dd>\n</dl>";
   return buffer;
   });
 
